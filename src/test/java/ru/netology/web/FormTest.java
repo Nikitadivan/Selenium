@@ -1,0 +1,25 @@
+package ru.netology.web;
+
+
+import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.withText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+
+public class FormTest {
+    @Test
+    void shouldSubmitRequest() {
+        Configuration.holdBrowserOpen = true;
+        open("http://localhost:9999");
+        $("[data-test-id=name] input").setValue("Никита");
+        $("[data-test-id=phone] input").setValue("+79120050949");
+        $("[data-test-id=agreement]").click();
+        $(withText("Продолжить")).click();
+        $(withText("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.")).should(visible);
+
+
+    }
+}
