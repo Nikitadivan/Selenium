@@ -4,6 +4,7 @@ package ru.netology.web;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
@@ -18,7 +19,7 @@ public class FormTest {
         $("[data-test-id=phone] input").setValue("+79120050949");
         $("[data-test-id=agreement]").click();
         $(withText("Продолжить")).click();
-        $(withText("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.")).should(visible);
+        $("[data-test-id=order-success]").shouldHave(exactText("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
 
 
     }
